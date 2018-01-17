@@ -1,0 +1,109 @@
+Rem Attribute VBA_ModuleType=VBADocumentModule
+Option VBASupport 1
+Option Explicit
+
+Public Sub ClearMe()
+    Range("A1:T14").Clear
+End Sub
+Public Sub InitOneTen()
+    Cells(1, 1).Font.Bold = True
+    Cells(1, 1).Font.Size = 28
+    Cells(1, 1).Font.Name = "Thaoma"
+    Cells(1, 1).Font.ColorIndex = 23
+    
+    Cells(11, 11).Font.Bold = True
+    Cells(11, 11).Font.Size = 28
+    Cells(11, 11).Font.Name = "Thaoma"
+    Cells(11, 11).Font.ColorIndex = 47
+    
+    Cells(12, 11).Font.Bold = True
+   ' ActiveCell.Font.ColorIndex = 17
+   ' ActiveCell.Font.Color = RGB(255, 0, 0)
+End Sub
+Public Function HowCowCheck(q0 As String, bmi As Double)
+    If (bmi >= 10 And bmi < 20) Then
+        Cells(11, 11).Font.ColorIndex = 3
+        Cells(12, 11).Font.ColorIndex = 3
+        Cells(12, 11) = "Underweight"
+    ElseIf (bmi >= 20 And bmi < 25) Then
+        Cells(11, 11).Font.ColorIndex = 43
+        Cells(12, 11).Font.ColorIndex = 43
+        Cells(12, 11) = "Proper weight"
+    ElseIf (bmi >= 25 And bmi < 30) Then
+        Cells(11, 11).Font.ColorIndex = 14
+        Cells(12, 11).Font.ColorIndex = 14
+        Cells(12, 11) = "Overweight"
+    ElseIf (bmi >= 30 And bmi < 35) Then
+        Cells(11, 11).Font.ColorIndex = 45
+        Cells(12, 11).Font.ColorIndex = 45
+        Cells(12, 11) = "Obesity"
+    ElseIf (bmi >= 35 And bmi < 40) Then
+        Cells(11, 11).Font.ColorIndex = 30
+        Cells(12, 11).Font.ColorIndex = 30
+        Cells(12, 11) = "Large Obesity"
+    ElseIf (bmi >= 40 And bmi <= 50) Then
+        Cells(11, 11).Font.ColorIndex = 3
+        Cells(12, 11).Font.ColorIndex = 3
+        Cells(12, 11) = "Severe Obesity"
+    Else: MsgBox "Hello " & q0 & ", Error In Bmi"
+          Cells(11, 11).Font.ColorIndex = 9
+          Cells(12, 11).Font.ColorIndex = 9
+          Cells(12, 11) = "Error 42"
+    End If
+End Function
+
+Public Sub HeloWorld()
+    ClearMe
+    InitOneTen
+    Dim i, j, q1, q2, q3 As Integer
+    Dim q0 As String
+    Dim q2d, bmi As Double
+    q0 = InputBox("What is your name?")
+    Cells(1, 1).Value = "Hello, " & q0
+    MsgBox "Hello " & q0
+aq1:
+    q1 = InputBox("What is your weight (kg) ?")
+    If IsNumeric(q1) = False Then
+       MsgBox "Not a Number Try Again"
+       GoTo aq1
+    End If
+aq2:
+    q2 = InputBox("What is your height (Cm) ?")
+    If IsNumeric(q2) = False Then
+        MsgBox "Not a Number Try Again"
+        GoTo aq2
+    End If
+aq3:
+    q3 = InputBox("How old are you?")
+    If IsNumeric(q3) = False Then
+        MsgBox "Not a Number Try Again"
+        GoTo aq3
+    End If
+    q2d = q2 / 100
+    bmi = q1 / (q2d * q2d)
+    
+    For i = 1 To 10
+          For j = 1 To 10
+               Cells(i + 1, j + 1).Value = i * j
+          Next j
+    Next i
+    Cells(i, i).Value = "Hello, " & q0 & ", Your BMI IS " & bmi
+    HowCowCheck q0, bmi
+End Sub
+
+Public Sub Testings()
+    ClearMe
+    InitOneTen
+    Dim q0 As String
+    Dim bmi As Double
+    q0 = "Test"
+    For bmi = 8 To 52
+        MsgBox "Hello " & q0 & ", Your BMI IS " & bmi
+        Cells(11, 11).Value = "Hello " & q0 & ", Your BMI IS " & bmi
+        HowCowCheck q0, bmi
+    Next bmi
+    ClearMe
+End Sub
+
+
+
